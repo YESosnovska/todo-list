@@ -18,6 +18,15 @@
           {% else %}
             <div style="color: green">Done</div>
           {% endif %}
+        {% if task.done %}
+          <a href="{% url 'tasks:toggle-implementation' pk=task.id %}" class="btn btn-secondary link-to-page">
+            Undo
+          </a>
+        {% else %}
+          <a href="{% url 'tasks:toggle-implementation' pk=task.id %}" class="btn btn-success link-to-page">
+            Complete
+          </a>
+        {% endif %}
         </p>
         <p>
           Created at {{ task.datetime }}
