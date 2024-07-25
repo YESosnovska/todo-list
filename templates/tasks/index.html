@@ -9,12 +9,31 @@
   </h1>
  
   {% if task_list %}
-    <ul>
       {% for task in task_list %}
-        <li>
-        </li>
+        <hr>
+        <p>
+          {{ task.content }}
+          {% if task.done is False %}
+            <div style="color: red">Not done</div>
+          {% else %}
+            <div style="color: green">Done</div>
+          {% endif %}
+        </p>
+        <p>
+          Created at {{ task.datetime }}
+          {% if task.deadline %}
+            <div style="color: darkred">Deadline {{ task.deadline }}</div>
+          {% endif %}
+        </p>
+        <p>
+          Tags 
+          {% for tag in task.tags.all %}
+            {{ tag.name }}
+          {% endfor %}
+          <a href="{% url 'tasks:task-update' pk=task.id %}">Update</a>
+          <a href="{% url 'tasks:task-delete' pk=task.id %}">Delete</a>
+        </p>
       {% endfor %}
-    </ul>
   {% else %}
     <p>There are no tasks</p>
   {% endif %}
