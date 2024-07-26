@@ -19,13 +19,19 @@
             <div style="color: green">Done</div>
           {% endif %}
         {% if task.done %}
-          <a href="{% url 'tasks:toggle-implementation' pk=task.id %}" class="btn btn-secondary link-to-page">
+          <form action="{% url 'tasks:toggle-implementation' pk=task.id %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-secondary link-to-page" type="submit">
             Undo
-          </a>
+          </button>
+          </form>
         {% else %}
-          <a href="{% url 'tasks:toggle-implementation' pk=task.id %}" class="btn btn-success link-to-page">
+          <form action="{% url 'tasks:toggle-implementation' pk=task.id %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-success link-to-page" type="submit">
             Complete
-          </a>
+          </button>
+          </form>
         {% endif %}
         </p>
         <p>
