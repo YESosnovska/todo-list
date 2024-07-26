@@ -51,8 +51,9 @@ class TagDeleteView(generic.DeleteView):
     success_url = reverse_lazy("tasks:tag-list")
 
 
-def toggle_task_implementation(request, pk):
-    task = Task.objects.get(id=pk)
-    task.done = not task.done
-    task.save()
-    return HttpResponseRedirect(reverse_lazy("tasks:index"))
+class ToggleTaskImplementation(generic.View):
+    def post(self, request, pk, *args, **kwargs):
+        task = Task.objects.get(id=pk)
+        task.done = not task.done
+        task.save()
+        return HttpResponseRedirect(reverse_lazy("tasks:index"))
